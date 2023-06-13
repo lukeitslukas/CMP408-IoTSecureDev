@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Minecraft Server</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/bootstrap/css/bootstrap.min.css') }}">
+</head>
+
+<body class="text-center">
+    <header>
+        <h1 class="fs-1 text-center" style="padding: 10px;">Watching Server {{ ip }}</h1>
+    </header>
+    <div class="container" style="padding: 12px;">
+        {% for chunkUsers in users %}
+        <div class="row g-0 row-cols-1 row-cols-sm-1 row-cols-md-3 row-cols-lg-3 row-cols-xl-3 row-cols-xxl-3">
+            {% if chunkUsers[0] %}
+                <div class="col"><img src="{{ url_for('static', filename='images/portraits/%s.png' % chunkUsers[0]) }}" class="rounded img-fluid">
+                    <h6 class="display-6">{{ chunkUsers[0] }}</h6>
+                </div>
+            {% endif %}
+            {% if chunkUsers[1] %}
+                <div class="col"><img src="{{ url_for('static', filename='images/portraits/%s.png' % chunkUsers[1]) }}" class="rounded img-fluid">
+                    <h6 class="display-6">{{ chunkUsers[1] }}</h6>
+                </div>
+            {% endif %}
+            {% if chunkUsers[2] %}
+                <div class="col"><img src="{{ url_for('static', filename='images/portraits/%s.png' % chunkUsers[2]) }}" class="rounded img-fluid">
+                    <h6 class="display-6">{{ chunkUsers[2] }}</h6>
+                </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    <div class="container">
+        <hr>
+    </div>
+    <div class="container">
+        {% for player in offlineList %}
+            <div class="row">
+                <div class="col d-flex justify-content-center">
+                    <div class="d-flex float-start align-items-center m-2"><img src="{{ url_for('static', filename='images/faces/%s.png' % player['username']) }}" class="rounded img-fluid"></div>
+                    <div class="d-inline-block float-start m-2">
+                        <h6 class="display-6 text-start">{{ player['username'] }}</h6>
+                        <p class="text-start">Last Seen: {{ player['last_seen'] }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <footer class="text-white text-bg-dark fixed-bottom">
+        <p class="text-muted py-4 m-0">Minecraft Server Watcher by @lukeitslukas</p>
+    </footer>
+    <script src="{{ url_for('static', filename='assets/bootstrap/js/bootstrap.min.js') }}"></script>
+</body>
+
+</html>
